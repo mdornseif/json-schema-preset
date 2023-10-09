@@ -7,7 +7,7 @@ Produce a suitable default template / preset based on a [JSON-Schema](https://js
 It is in the spirit of [json-schema-empty](https://www.npmjs.com/package/json-schema-empty).
 json-schema-empty is different in that it closely observes the `required` properties and only adds required values.
 
-json-schema-preset on the other hand copies default values not caring if they are required or not. It also ensures that no string properties are never `null` but preset with an empty string (`""`). Arrays without defaults are replaced by `[]`.
+json-schema-preset on the other hand copies default values not caring if they are required or not. It also ensures that no string properties are `null` but preset with an empty string (`""`). Arrays without defaults are replaced by `[]`.
 
 You can generate a preset for a form etc. like this:
 
