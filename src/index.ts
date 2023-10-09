@@ -1,1 +1,1 @@
-export * from './lib/json-schema-preset';
+export * from './lib/json-schema-preset'

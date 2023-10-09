@@ -5,10 +5,10 @@
  * Copyright (c) 2021 Dr. Maximillian Dornseif
  */
 
-import test from 'ava';
-import { JSONSchema7 } from 'json-schema';
+import test from 'ava'
+import { JSONSchema7 } from 'json-schema'
 
-import { jsonPreset } from './json-schema-preset';
+import { jsonPreset } from './json-schema-preset'
 
 const schema: JSONSchema7 = {
   $id: 'https://huwawi3.hudora.de/schemata/H3Test',
@@ -52,7 +52,7 @@ const schema: JSONSchema7 = {
       },
     },
   },
-};
+}
 
 test('handles simple schema', (t) => {
   t.deepEqual(jsonPreset(schema), {
@@ -61,5 +61,5 @@ test('handles simple schema', (t) => {
     s2: '',
     s3: '',
     sub: [],
-  } as unknown);
-});
+  } as unknown)
+})
