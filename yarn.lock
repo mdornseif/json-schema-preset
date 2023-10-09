@@ -3259,9 +3259,9 @@ json-parse-even-better-errors@^2.3.0:
   integrity sha512-xyFwyhro/JEof6Ghe2iz2NcXoj2sloNsWr/XsERDK/oiPCfaNhl5ONfp+jQdAZRQQ0IJWNzH9zIZF7li91kh2w==
 
 json-schema-default@^1.0.0:
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/json-schema-default/-/json-schema-default-1.0.0.tgz#72b6c11bc94db284057866bde95cd754df6d7962"
-  integrity sha512-o8Jub0+cFMJacbjshgLAneh5NUF0GFBauuapUOKJXw7LghoSDRw0jOdOHk5MoygS1O3/HlCJwt7BDPxvxiZqQA==
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/json-schema-default/-/json-schema-default-1.0.1.tgz#fc97735efa2b56060c2f5763986c7e2cfd0b5289"
+  integrity sha512-M1REZ0YWbI2hzhHqk7Xshs7uKCmRp6O5o8IwPaVLTCaBRhv386iV2FkgfpHW9B1cq2kwwl6/rJkgo5/KB5nv6Q==
   dependencies:
     json-schema "^0.4.0"
     json-schema-traverse "^1.0.0"
