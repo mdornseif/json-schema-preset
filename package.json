@@ -1,6 +1,7 @@
 {
   "name": "json-schema-preset",
   "version": "1.0.0",
+  "packageManager": "yarn@1.22.19",
   "description": "Produce a suitable default template / preset based on a JSON-Schema.",
   "main": "build/main/index.js",
   "typings": "build/main/index.d.ts",
