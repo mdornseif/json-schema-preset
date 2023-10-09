@@ -1,6 +1,6 @@
 {
   "name": "json-schema-preset",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Produce a suitable default template / preset based on a JSON-Schema.",
   "keywords": [
     "JSON",
