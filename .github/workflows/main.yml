@@ -2,8 +2,9 @@ name: Test, Build, and release
 on:
   push:
     branches:
-      - main
       - master
+      - main
+    pull_request:
 permissions:
   actions: read
   checks: read
@@ -16,7 +17,7 @@ permissions:
 
 jobs:
   test:
-    name: Lint and test on Node ${{ matrix.node }} and ${{ matrix.os }}
+    name: Build, lint, and test on Node ${{ matrix.node }} and ${{ matrix.os }}
 
     runs-on: ${{ matrix.os }}
     strategy:
@@ -28,47 +29,54 @@ jobs:
           # - macOS-latest
 
     steps:
-      - name: Checkout repo
-        uses: actions/checkout@v3
+      - name: Checkout repo 😸
+        uses: actions/checkout@v4
 
-      - name: Use Node ${{ matrix.node }}
-        uses: actions/setup-node@v3
+      - name: Use Node ${{ matrix.node }} 🪛
+        uses: actions/setup-node@v4
         with:
           node-version: ${{ matrix.node }}
-          cache: 'yarn'
+          cache: 'npm'
 
       - name: Install dependencies 📦
-        run: yarn install --frozen-lockfile  --prefer-offline
+        # run: echo "//npm.pkg.github.com/:_authToken=${{ secrets.NODE_AUTH_TOKEN }}" >> ~/.npmrc
+        run: npm install
 
-      # - name: Lint 🔍
-      #   run: yarn lint
+      - name: Lint 🔍
+        run: npm run lint
 
       - name: Test 🧪
-        run: yarn test --maxWorkers=2
+        run: npm run test --ci --coverage --maxWorkers=2
 
       - name: Build 🏗
         # run: yarn prepare
-        run: yarn build
+        run: npm run build
 
   release:
-    name: Release 🚚
+    name: Release
     needs: test
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           fetch-depth: 0
       - name: Use Node
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
+          registry-url: https://npm.pkg.github.com
+          always-auth: true
+          scope: '@hudora'
 
       - name: Install dependencies 📦
         # run: echo "//npm.pkg.github.com/:_authToken=${{ secrets.NODE_AUTH_TOKEN }}" >> ~/.npmrc
-        run: yarn install --frozen-lockfile  --prefer-offline
+        run: npm install
 
       - name: Build 🏗
         # run: yarn prepare
-        run: yarn build
+        run: npm run build
 
       - name: Release
         env:
@@ -77,7 +85,21 @@ jobs:
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
         run: npx semantic-release
 
+      - name: Build Documentation 📚
+        # run: yarn prepare
+        run: npm run doc
+      - name: Deploy documentation 📚
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./docs
+
       # - name: Deploy storybook to GitHub Pages
-      #   run: yarn run storybook-deploy --ci
+      #   run: npm run storybook-deploy --ci
       #   env:
-      #       GH_TOKEN: ${{ github.actor }}:${{ secrets.GITHUB_TOKEN }}
+      #     GH_TOKEN: ${{ github.actor }}:${{ secrets.GITHUB_TOKEN }}
+
+      # - name: Deploy documentation to GitHub Pages
+      #   run: yarn run doc:build ; yarn run doc:publish
+      #   env:
+      #     GH_TOKEN: ${{ github.actor }}:${{ secrets.GITHUB_TOKEN }}
